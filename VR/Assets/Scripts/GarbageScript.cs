@@ -4,28 +4,27 @@ using UnityEngine;
 
 public class GarbageScript : MonoBehaviour
 {
+    public ScriptableObjectTest GameStatus;
     public GameObject NextMission;
     public GameObject Door;
     public GameObject Effect;
+    public GameObject AudioSorceObject;
     public int AmountOfGarbageToPickUp;
 
-    //private Animator doorAnimation;
     private new ParticleSystem particleSystem;
+    private AudioSource garbageInTrashAudioSource;
+
     // Start is called before the first frame update
     void Start()
     {
         particleSystem = Effect.GetComponent<ParticleSystem>();
+        garbageInTrashAudioSource = AudioSorceObject.GetComponent<AudioSource>();
         particleSystem.Stop();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        //Garbage put in trash
         if (other.CompareTag("Garbage"))
         {
             other.gameObject.SetActive(false);
@@ -33,15 +32,20 @@ public class GarbageScript : MonoBehaviour
             
             particleSystem.Stop();
             particleSystem.Play();
+            garbageInTrashAudioSource.Play();
         }
 
-        if(AmountOfGarbageToPickUp == 0)
+        if(AmountOfGarbageToPickUp == 0 && !GameStatus.GarbageMissionComplete)
         {
-            //Active Next mission (fire mission)
+            //Garbage Mission Complete
+            GameStatus.GarbageMissionComplete = true;
+            GameStatus.finishTimeGarbageMission = Time.realtimeSinceStartup;
+            //Activate Next mission (fire mission)
             NextMission.SetActive(true);
-
+            GameStatus.StartTimeFireMission = Time.realtimeSinceStartup;
             //Open Door
             Door.transform.Rotate(new Vector3(0, 90, 0));
+
         }
     }
 }
