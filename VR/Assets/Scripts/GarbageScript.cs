@@ -13,6 +13,7 @@ public class GarbageScript : MonoBehaviour
 
     private new ParticleSystem particleSystem;
     private AudioSource garbageInTrashAudioSource;
+    private Animator doorAnimation;
 
     // Start is called before the first frame update
     void Start()
@@ -20,6 +21,8 @@ public class GarbageScript : MonoBehaviour
         particleSystem = Effect.GetComponent<ParticleSystem>();
         garbageInTrashAudioSource = AudioSorceObject.GetComponent<AudioSource>();
         particleSystem.Stop();
+        doorAnimation = Door.GetComponent<Animator>();
+        doorAnimation.enabled = false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -45,6 +48,8 @@ public class GarbageScript : MonoBehaviour
             GameStatus.StartTimeFireMission = Time.realtimeSinceStartup;
             //Open Door
             Door.transform.Rotate(new Vector3(0, 90, 0));
+          
+          
 
         }
     }
