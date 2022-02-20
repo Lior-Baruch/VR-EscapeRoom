@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GarbageScript : MonoBehaviour
 {
-    public ScriptableObjectTest GameStatus;
+    public GameStateScriptableObjectScript GameStatus;
     public GameObject NextMission;
     public GameObject Door;
     public GameObject Effect;
@@ -13,16 +13,18 @@ public class GarbageScript : MonoBehaviour
 
     private new ParticleSystem particleSystem;
     private AudioSource garbageInTrashAudioSource;
-    private Animator doorAnimation;
+    //private Animator doorAnimation;
 
     // Start is called before the first frame update
     void Start()
     {
+        GameStatus.StartTimeGarbageMission = Time.realtimeSinceStartup;
         particleSystem = Effect.GetComponent<ParticleSystem>();
         garbageInTrashAudioSource = AudioSorceObject.GetComponent<AudioSource>();
         particleSystem.Stop();
-        doorAnimation = Door.GetComponent<Animator>();
-        doorAnimation.enabled = false;
+        //doorAnimation = Door.GetComponent<Animator>();
+        //doorAnimation.enabled = false;
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -30,9 +32,10 @@ public class GarbageScript : MonoBehaviour
         //Garbage put in trash
         if (other.CompareTag("Garbage"))
         {
+            //logic
             other.gameObject.SetActive(false);
             AmountOfGarbageToPickUp--;
-            
+            //effects
             particleSystem.Stop();
             particleSystem.Play();
             garbageInTrashAudioSource.Play();
@@ -43,14 +46,11 @@ public class GarbageScript : MonoBehaviour
             //Garbage Mission Complete
             GameStatus.GarbageMissionComplete = true;
             GameStatus.finishTimeGarbageMission = Time.realtimeSinceStartup;
-            //Activate Next mission (fire mission)
-            NextMission.SetActive(true);
-            GameStatus.StartTimeFireMission = Time.realtimeSinceStartup;
+            GameStatus.TotalTimeGarbageMission = GameStatus.finishTimeGarbageMission - GameStatus.StartTimeGarbageMission;
             //Open Door
             Door.transform.Rotate(new Vector3(0, 90, 0));
-          
-          
-
+            //Activate Next mission (fire mission)
+            NextMission.SetActive(true);
         }
     }
 }

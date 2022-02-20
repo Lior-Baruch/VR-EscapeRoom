@@ -5,17 +5,17 @@ using UnityEngine;
 public class FireSteamCollisionScript : MonoBehaviour
 {
     public GameObject FireMission;
-
     public GameObject NextMission;
-    public ScriptableObjectTest GameStatus;
     public GameObject WildFire;
     public GameObject FireOrigin;
+    public GameStateScriptableObjectScript GameStatus;
 
     private AudioSource fireMusic;
     private AudioSource SuccessSound;
 
     private void Start()
     {
+        GameStatus.StartTimeFireMission = Time.realtimeSinceStartup;
         fireMusic = FireMission.GetComponent<AudioSource>();
         SuccessSound = FireOrigin.GetComponent<AudioSource>();
     }
@@ -27,6 +27,7 @@ public class FireSteamCollisionScript : MonoBehaviour
         {
             GameStatus.FireMissionComplete = true;
             GameStatus.finishTimeFireMission = Time.realtimeSinceStartup;
+            GameStatus.TotalTimeFireMission = GameStatus.finishTimeFireMission - GameStatus.StartTimeFireMission;
             WildFire.SetActive(false);
 
             fireMusic.Stop();
