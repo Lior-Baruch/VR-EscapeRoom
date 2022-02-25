@@ -5,7 +5,9 @@ using UnityEngine;
 public class FireSteamCollisionScript : MonoBehaviour
 {
     public GameObject FireMission;
-    public GameObject NextMission;
+    public GameObject FinishedMissionUI;
+    //public GameObject NextMission;
+    //public GameObject Foods;
     public GameObject WildFire;
     public GameObject FireOrigin;
     public GameStateScriptableObjectScript GameStatus;
@@ -25,17 +27,15 @@ public class FireSteamCollisionScript : MonoBehaviour
         //Fire Mission Complete
         if (other.CompareTag("FireOrigin") && !GameStatus.FireMissionComplete)
         {
-            GameStatus.FireMissionComplete = true;
-            GameStatus.finishTimeFireMission = Time.realtimeSinceStartup;
-            GameStatus.TotalTimeFireMission = GameStatus.finishTimeFireMission - GameStatus.StartTimeFireMission;
             WildFire.SetActive(false);
-
+            //update GameStatus
+            GameStatus.FireMissionComplete = true;
+            GameStatus.FinishTimeFireMission = Time.realtimeSinceStartup;
+            GameStatus.TotalTimeFireMission = GameStatus.FinishTimeFireMission - GameStatus.StartTimeFireMission;
+            //sound and timeUI
             fireMusic.Stop();
             SuccessSound.Play();
-
-
-            //Activate Next mission (fire mission)
-            NextMission.SetActive(true);
+            FinishedMissionUI.SetActive(true);
         }
     }
 }

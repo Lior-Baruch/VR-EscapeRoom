@@ -11,19 +11,24 @@ public class GameStateScriptableObjectScript : ScriptableObject
     // Mission status
     public bool GarbageMissionComplete = false;
     public bool FireMissionComplete = false;
-    public bool ThirdMissionComplete = false;
+    public bool DinnerMissionComplete = false;
     // startMissionTimes
     public float StartTime = -1;
     public float StartTimeGarbageMission = -1;
     public float StartTimeFireMission = -1;
+    public float StartTimeDinnerMission = -1;
     // finishedMissionTimes
-    public float finishTime = -1;
-    public float finishTimeGarbageMission = -1;
-    public float finishTimeFireMission = -1;
+    public float FinishTime = -1;
+    public float FinishTimeGarbageMission = -1;
+    public float FinishTimeFireMission = -1;
+    public float FinishTimeDinnerMission = -1;
+
     //totalMissionTime
     public float TotalTime = -1;
     public float TotalTimeGarbageMission = -1;
     public float TotalTimeFireMission = -1;
+    public float TotalTimeDinnerMission = -1;
+
 
     private void OnEnable()
     {
@@ -36,7 +41,18 @@ public class GameStateScriptableObjectScript : ScriptableObject
 
     private void OnDestroy()
     {
-        
+        //store time for each mission
+        if(GarbageMissionComplete)
+            PlayerPrefs.SetFloat(UserID + "GarbageMission", TotalTimeGarbageMission);
+        if (FireMissionComplete)
+            PlayerPrefs.SetFloat(UserID + "FireMission", TotalTimeFireMission);
+        if (DinnerMissionComplete)
+            PlayerPrefs.SetFloat(UserID + "DinnerMission", TotalTimeDinnerMission);
+        //store time for total escape room
+        if (GarbageMissionComplete && FireMissionComplete && DinnerMissionComplete)
+            PlayerPrefs.SetFloat(UserID + "EscapeRoomMission", TotalTime);
+        //save stored values in disk
+        PlayerPrefs.Save();
     }
 
 

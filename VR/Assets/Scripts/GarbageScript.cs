@@ -1,11 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GarbageScript : MonoBehaviour
 {
     public GameStateScriptableObjectScript GameStatus;
-    public GameObject NextMission;
+    public GameObject FinishedMissionUI;
+    //public TextMeshProUGUI FinishMissionText;
+    //public GameObject NextMission;
     public GameObject Door;
     public GameObject Effect;
     public GameObject AudioSorceObject;
@@ -22,9 +26,6 @@ public class GarbageScript : MonoBehaviour
         particleSystem = Effect.GetComponent<ParticleSystem>();
         garbageInTrashAudioSource = AudioSorceObject.GetComponent<AudioSource>();
         particleSystem.Stop();
-        //doorAnimation = Door.GetComponent<Animator>();
-        //doorAnimation.enabled = false;
-
     }
 
     private void OnTriggerEnter(Collider other)
@@ -45,12 +46,14 @@ public class GarbageScript : MonoBehaviour
         {
             //Garbage Mission Complete
             GameStatus.GarbageMissionComplete = true;
-            GameStatus.finishTimeGarbageMission = Time.realtimeSinceStartup;
-            GameStatus.TotalTimeGarbageMission = GameStatus.finishTimeGarbageMission - GameStatus.StartTimeGarbageMission;
+            GameStatus.FinishTimeGarbageMission = Time.realtimeSinceStartup;
+            GameStatus.TotalTimeGarbageMission = GameStatus.FinishTimeGarbageMission - GameStatus.StartTimeGarbageMission;
             //Open Door
             Door.transform.Rotate(new Vector3(0, 90, 0));
-            //Activate Next mission (fire mission)
-            NextMission.SetActive(true);
+           
+            //Active UI Mission Time and write time of mission
+            FinishedMissionUI.SetActive(true);
+            
         }
     }
 }
