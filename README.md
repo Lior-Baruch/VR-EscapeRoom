@@ -6,7 +6,7 @@ Contains 3 Missions - Cleaning mission, Fire mission and Dinner mission.
 **Student name** – Lior Baruch.
 
 **Game flow (how should it be solved by the user)** –
-The player starts locked in his bedroom with a StartUI, once he clicks "Start" the Garbage Mission starts, The player should clean his room by placing all the cola-cans in the trash. after that the Fire Mission starts, the player must extinguish the fire, after that the DinnerMission starts, first the Player must place the Dinnerware and after must place the Hamburger on the plate.
+The player starts locked in his bedroom with a StartUI, once he clicks "Start" the Garbage Mission starts, The player should clean his room by placing all the cola-cans in the trash. after that the Fire Mission starts, the player must extinguish the fire, after that the DinnerMission starts, first the Player must place the Dinnerware and after must place the Hamburger on the plate. when finished the score is saved and can restart.
 
 **Dev log :** 
 **A.	Testing without VR –**
@@ -28,10 +28,10 @@ In Scripts folder + ScriptableObjects folder.
 **F.	Animations –**
 LamlaBubbleGunPrefab + doors open/close.
 
-**G.	Particle Effects – **
+**G.	Particle Effects –**
 Cola-Can in trash, Fire, Fire extinguisher,  LamlaBubbleGunPrefab.
 
-**H.	Data logging – **
+**H.	Data logging –**
 Using PlayerPrefs + GameStateScriptableObject, in PlayerScript.SaveMissionTime().
 
 **I.	Documentation + Delivery –**
