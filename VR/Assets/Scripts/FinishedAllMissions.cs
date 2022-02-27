@@ -11,9 +11,10 @@ public class FinishedAllMissions : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        FinishText.text = "Garbage time = " + GameStatus.TotalTimeGarbageMission +
-            "-- Fire time = " + GameStatus.TotalTimeFireMission +
-            "-- Dinner Time = " + GameStatus.TotalTimeDinnerMission +
-            "-- Total time = " + GameStatus.TotalTime;
+        FinishText.text = "congratulations, you have passed all the missions." + System.Environment.NewLine +
+            "Garbage time = " + GameStatus.TotalTimeGarbageMission + System.Environment.NewLine +
+            "Fire time = " + GameStatus.TotalTimeFireMission + System.Environment.NewLine +
+            "Dinner Time = " + GameStatus.TotalTimeDinnerMission + System.Environment.NewLine +
+            "Total time = " + GameStatus.TotalTime;
     }
 }

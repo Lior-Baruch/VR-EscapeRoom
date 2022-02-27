@@ -40,20 +40,21 @@ public class GarbageScript : MonoBehaviour
             particleSystem.Stop();
             particleSystem.Play();
             garbageInTrashAudioSource.Play();
+
+            //Garbage Mission Complete
+            if (AmountOfGarbageToPickUp <= 0)
+            {
+                //update GameStatus
+                GameStatus.GarbageMissionComplete = true;
+                GameStatus.FinishTimeGarbageMission = Time.realtimeSinceStartup;
+                GameStatus.TotalTimeGarbageMission = GameStatus.FinishTimeGarbageMission - GameStatus.StartTimeGarbageMission;
+                //Open Door
+                Door.transform.Rotate(new Vector3(0, 90, 0));
+                //Active UI Mission Time
+                FinishedMissionUI.SetActive(true);
+            }
         }
 
-        if(AmountOfGarbageToPickUp == 0 && !GameStatus.GarbageMissionComplete)
-        {
-            //Garbage Mission Complete
-            GameStatus.GarbageMissionComplete = true;
-            GameStatus.FinishTimeGarbageMission = Time.realtimeSinceStartup;
-            GameStatus.TotalTimeGarbageMission = GameStatus.FinishTimeGarbageMission - GameStatus.StartTimeGarbageMission;
-            //Open Door
-            Door.transform.Rotate(new Vector3(0, 90, 0));
-           
-            //Active UI Mission Time and write time of mission
-            FinishedMissionUI.SetActive(true);
-            
-        }
+        
     }
 }

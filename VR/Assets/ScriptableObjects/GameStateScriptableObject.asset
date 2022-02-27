@@ -12,6 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4a88b54f3c57b74da2982a6422409b5, type: 3}
   m_Name: GameStateScriptableObject
   m_EditorClassIdentifier: 
-  GarbageMission: 0
-  FireMission: 0
-  ThirdMissionComplete: 0
+  UserID: 268
+  GarbageMissionComplete: 0
+  FireMissionComplete: 0
+  DinnerMissionComplete: 0
+  StartTime: -1
+  StartTimeGarbageMission: -1
+  StartTimeFireMission: -1
+  StartTimeDinnerMission: -1
+  FinishTime: -1
+  FinishTimeGarbageMission: -1
+  FinishTimeFireMission: -1
+  FinishTimeDinnerMission: -1
+  TotalTime: -1
+  TotalTimeGarbageMission: -1
+  TotalTimeFireMission: -1
+  TotalTimeDinnerMission: -1

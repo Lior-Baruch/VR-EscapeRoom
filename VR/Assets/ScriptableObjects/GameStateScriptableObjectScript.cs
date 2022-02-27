@@ -39,10 +39,10 @@ public class GameStateScriptableObjectScript : ScriptableObject
         PlayerPrefs.SetInt("prevID", UserID);
     }
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         //store time for each mission
-        if(GarbageMissionComplete)
+        if (GarbageMissionComplete)
             PlayerPrefs.SetFloat(UserID + "GarbageMission", TotalTimeGarbageMission);
         if (FireMissionComplete)
             PlayerPrefs.SetFloat(UserID + "FireMission", TotalTimeFireMission);
@@ -54,6 +54,7 @@ public class GameStateScriptableObjectScript : ScriptableObject
         //save stored values in disk
         PlayerPrefs.Save();
     }
+
 
 
 

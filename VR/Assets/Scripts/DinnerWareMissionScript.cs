@@ -75,15 +75,7 @@ public class DinnerWareMissionScript : MonoBehaviour
             && NumOfForksToSet <= 0 && NumOfCupsToSet <= 0)
         {
             //Mission Complete
-            //Foods.isStatic = false;
             FinishedMissionUI.SetActive(true);
-            //this.gameObject.SetActive(false);
-        }
-        else
-        {
-            //Foods.isStatic = false;
-            //Mission Not Complete
-            //  NextMission.SetActive(false);
         }
     }
 }
